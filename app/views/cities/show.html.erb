@@ -1,0 +1,25 @@
+<div class="jumbotron jumbotron-fluid" style="background:url(https://omny.fm/shows/gossip/12-basement-bethany/image.jpg?t=1555508442&size=WideShare)">
+  <div class="container">
+    <h1 class="display-4"> <%= @city.name%> </h1>
+    <p class="lead">Les Gossips de la ville </p>
+  </div>
+</div>
+<%
+=begin%>
+ @city.user.each
+@user.gossip.each 
+<%
+=end%>
+
+<%users = User.where(city_id: params[:id]) %>
+<%all_gossips = Gossip.where(user_id: users.ids) %> 
+<div class="card-columns">
+<%all_gossips.each_with_index do |gossip, index| %>
+        <div class="card">
+            <div class="card-body">
+            <h5 class="card-title"> Gossip N° <%=index+=1%> <%= gossip.title %></h5>
+            <p class="card-text"><%=gossip.user.first_name%></p>
+            <%= link_to "Cliquez ici", gossip_path(gossip) %>
+            </div>
+        </div>
+<%end%>

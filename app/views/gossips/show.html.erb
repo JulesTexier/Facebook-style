@@ -1,0 +1,58 @@
+
+<div class="jumbotron jumbotron-fluid" style="background:url(https://omny.fm/shows/gossip/12-basement-bethany/image.jpg?t=1555508442&size=WideShare)">
+  <div class="container">
+    <h1 class="display-4"><%= @gossip.title%></h1>
+    <p class="lead"> publié le : <%= @gossip.created_at.strftime ("%d %B %Y") %></p>
+  </div>
+</div>
+
+<div class="position-relative">
+    <blockquote class="blockquote text-center">
+    <p class="display-4">"<%=@gossip.content %>"</p>
+    <footer class="footer">Auteur : <%= link_to @gossip.user.first_name, user_path(@gossip.user_id) %></footer>
+    <footer class="footer">Ville : <%= link_to @gossip.user.city.name, city_path(@gossip.user.city_id) %></footer>
+    <br>
+    <p><%= @gossip.likes.count %> <%= (@gossip.likes.count) == 1 ? 'Like' : 'Likes'%></p>
+      <% pre_like = @gossip.likes.find { |like| like.user_id == current_user.id} %>
+      <% if pre_like %>
+        <%= button_to 'Unlike', gossip_like_path(@gossip, pre_like), method: :delete %>
+      <% else %>
+        <%= button_to 'Like', gossip_likes_path(@gossip), method: :post %>
+      <% end %>
+
+  <% if current_user == @gossip.user %>
+    <a href='<%=gossip_path(@gossip)%>'class="btn btn-outline-danger" data-confirm="Êtes-vous sû(e)?" data-method="DELETE"> Supprimer </a>
+    <a href="<%= edit_gossip_path(@gossip.id) %>" class="btn btn-outline-dark" role="button" aria-pressed="true">Editer le Gossip</a>
+    </blockquote>
+  <%else%>
+  <%end%>
+
+
+<div class="container">
+  <h2 class="text-center text-dark mb-4">Commentaires :</h2>
+ 
+    <% @gossip.comments.each_with_index do |comment, index| %>
+      <div class="card text-white bg-light m-2" >
+        <div class="card-body">
+        <h5 class="card-title"> <a class="text-dark" href="<%=user_path(comment.user)%>"><%= comment.user.first_name %> :</a></h5>
+          <p class="text-muted" ><%= comment.content %></p>
+            <% if current_user == comment.user %>
+          <a class="btn btn-primary" <%= link_to "Editer", edit_gossip_comment_path(@gossip, comment)%></a>
+            <% end%>
+        </div>
+      </div>
+    <% end %>
+
+</div>
+<div class="d-flex justify-content-center my-4">
+    <%= form_for([@gossip, @gossip.comments.build]) do |f| %>
+      <%= f.text_area :content, class: "rounded", style: "width: 50rem; height: 6rem", placeholder: "Ecris-ton commentaire" %>
+      <%= f.submit "Créer", class: 'mx-2 btn btn-primary position-absolute', style: "height: 2rem; padding: 1px"%>
+  <% end %>
+</div>
+
+
+</div>
+
+
+
