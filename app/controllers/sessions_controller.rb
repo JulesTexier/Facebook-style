@@ -9,11 +9,9 @@ class SessionsController < ApplicationController
       # on vérifie si l'utilisateur existe bien ET si on arrive à l'authentifier (méthode bcrypt) avec le mot de passe 
       if user && user.authenticate(params[:password])
         session[:user_id] = user.id
-        flash[:success] = "tu es connecté!"
-        redirect_to root_path
+        redirect_to root_path, success: 'Vous êtes connecté'
       else
-        flash.now[:danger] = 'Invalid email/password combination'
-        render 'new'
+        redirect_to new_session_path , danger: 'Invalid email/password combination'
       end
   end
 
