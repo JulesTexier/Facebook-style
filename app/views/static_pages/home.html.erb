@@ -8,15 +8,22 @@
 
     <% all_gossips = Gossip.all %>       
     <div class="card-columns">
-    <%all_gossips.each_with_index do |gossip, index| %>
-            <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title"> Gossip N° <%=index+=1%> <%= gossip.title %></h5>
-                  <p class="card-text"><%=gossip.user.first_name%></p>
-                  <a href='<%=gossip_path(gossip)%>'class ="btn btn-outline-secondary" style='margin-bottom: .75rem'>Lire le Gossip</a>
-                    <div>
-                      <p><%= gossip.likes.count %> <i class="fas fa-heart"></i>
+      <%all_gossips.each_with_index do |gossip, index| %>
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title"> Gossip N° <%=index+=1%> <%= gossip.title %></h5>
+            <p class="card-text"><%=gossip.user.first_name%></p>
+              <div class='container'>
+                <div class='row'>
+                  <div class='col-10' style='padding-left: 0px'>
+                    <a href='<%=gossip_path(gossip)%>'class ="btn btn-outline-secondary" style='margin-bottom: .75rem'>Lire le Gossip</a>
                     </div>
-                </div>
-            </div>
-    <%end%>
+                      <div class='col'>
+                        <p><%= gossip.likes.count %> <i class="fas fa-heart"></i>
+                      </div>
+                  </div>
+              </div>
+          </div>
+        </div>
+      <%end%>
+    </div>  
