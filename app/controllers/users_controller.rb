@@ -12,7 +12,8 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(password:params['password'], first_name: params['first_name'], last_name: params['last_name'], description: params['description'], city_id: params['city_id'],email: params['email'])
+    @user = User.new(password:params['password'], password_confirmation:params['password_confirmation'], first_name: params['first_name'], last_name: params['last_name'], description: params['description'], city_id: params['city_id'],email: params['email'])
+    
     if @user.save
       redirect_to ('/')
     else

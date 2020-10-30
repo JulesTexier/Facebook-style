@@ -11,10 +11,12 @@
     <%all_gossips.each_with_index do |gossip, index| %>
             <div class="card">
                 <div class="card-body">
-                <h5 class="card-title"> Gossip N° <%=index+=1%> <%= gossip.title %></h5>
-                <p class="card-text"><%=gossip.user.first_name%></p>
-                <a href='<%=gossip_path(gossip)%>'class ="btn btn-outline-secondary">Lire le Gossip</a>
-                <p><%= gossip.likes.count %> <%= (gossip.likes.count) == 1 ? 'Like' : 'Likes'%></p>
+                  <h5 class="card-title"> Gossip N° <%=index+=1%> <%= gossip.title %></h5>
+                  <p class="card-text"><%=gossip.user.first_name%></p>
+                  <a href='<%=gossip_path(gossip)%>'class ="btn btn-outline-secondary" style='margin-bottom: .75rem'>Lire le Gossip</a>
+                    <div>
+                      <p><%= gossip.likes.count %> <i class="fas fa-heart"></i>
+                    </div>
                 </div>
             </div>
     <%end%>
