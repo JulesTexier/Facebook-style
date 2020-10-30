@@ -13,49 +13,52 @@
 
   <body>
 
-    <% flash.each do |name, msg|%>
-      <div class='alert alert-<%= name %>'>
-        <%= msg %></div>
-    <%end%>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="<%="/"%>">The Gossip Project</a>
-        <div class="collapse navbar-collapse">
-            <ul class="navbar-nav mr-auto">
-              <li class="nav-item active">
-                <a class="nav-link" href="<%=root_path%>">Gossips <span class="sr-only">(current)</span></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="<%=static_pages_team_path%>">Team</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="<%=static_pages_contact_path%>">Contact</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="<%=new_gossip_path%>">Create Gossip</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="<%=new_user_path%>">Create User</a>
-              </li>
-            </ul>
-        </div>
-        <ul class="nav navbar-nav navbar-right">
-              <% if session[:user_id] == nil %>
-                <div class="dropdown">
-                  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Connexion
-                  </button>
-                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="<%= new_user_path %>">S'inscrire </a>
-                        <a class="dropdown-item" href="<%= new_session_path %>">Se connecter</a>
+    <%flash.each do |name, msg|%>
+
+    <header> 
+      <div class='alert alert-<%= name %>' style='margin-bottom: 0'><%= msg %>
+        <%end%></div> 
+
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+          <a class="navbar-brand" href="<%="/"%>">The Gossip Project</a>
+          <div class="collapse navbar-collapse">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                  <a class="nav-link" href="<%=root_path%>">Gossips <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="<%=static_pages_team_path%>">Team</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="<%=static_pages_contact_path%>">Contact</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="<%=new_gossip_path%>">Create Gossip</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="<%=new_user_path%>">Create User</a>
+                </li>
+              </ul>
+          </div>
+          <ul class="nav navbar-nav navbar-right">
+                <% if session[:user_id] == nil %>
+                  <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Connexion
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                          <a class="dropdown-item" href="<%= new_user_path %>">S'inscrire </a>
+                          <a class="dropdown-item" href="<%= new_session_path %>">Se connecter</a>
+                    </div>
                   </div>
+                <% else%>
+                    <li class="dropdown-item"> <%= link_to "Se déconnecter", session_path(session.id), method: :delete %> </li>
                 </div>
-              <% else%>
-                  <li class="dropdown-item"> <%= link_to "Se déconnecter", session_path(session.id), method: :delete %> </li>
-              </div>
-              <% end %>
-          </ul>
-      </nav>
-    <%= yield %>
+                <% end %>
+            </ul>
+        </nav>
+     </header> 
+      <%= yield %>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>

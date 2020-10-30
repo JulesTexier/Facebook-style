@@ -7,13 +7,7 @@ gem 'table_print'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.4', '>= 5.2.4.4'
 # Use postgresql as the database for Active Record
-group :development, :test do
-  gem 'sqlite3'
-end
-
-group :production do
-  gem 'pg', '>= 0.18'
-end
+gem 'pg', '>= 0.18'
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
 # Use SCSS for stylesheets
